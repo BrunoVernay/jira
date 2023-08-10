@@ -259,10 +259,8 @@ and when you're done with an issue, you can send it to the great hard drive in t
 
 Updating components::
 
-    existingComponents = []
-    for component in issue.fields.components:
-        existingComponents.append({"name" : component.name})
-    issue.update(fields={"components": existingComponents})
+    existingComponents = list(map(lambda c: {'name': c}, issue.fields.components))
+    issue.update(fields={"components": [{'set': existingComponents}]})
 
 Working with Rich Text
 ^^^^^^^^^^^^^^^^^^^^^^
